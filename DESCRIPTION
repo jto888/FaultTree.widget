@@ -1,12 +1,12 @@
 Package: FaultTree.widget
 Type: Package
-Title: Fault Trees for Risk and Reliability Analysis
-Version: 0.0.5
-Date: 2016-5-21
+Title: widget code for FaultTree
+Version: 0.0.1
+Date: 2016-5-22
 Author: Jacob T. Ormerod
 Maintainer: Jacob T. Ormerod <jake@openreliability.org>
-Description: A package for constructing,calculating and displaying fault trees as a widget.
-Depends: R (>= 3.0.0)
+Description: Code for presenting fault trees data as a widget.
+Depends: FaultFree, R (>= 3.0.0)
 Imports: htmlwidgets (>= 0.3.2)
 License: GPL (>= 2)
 LazyLoad: yes
