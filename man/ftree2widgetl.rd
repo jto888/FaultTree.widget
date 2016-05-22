@@ -1,24 +1,23 @@
-\name{ftree2html}
-\alias{ftree2html}
+\name{ftree2widget}
+\alias{ftree2widget}
 
-\title{ Fault Tree Display }
+\title{ Code for creating an html widget out of FaultTree data }
 
-\description{Prepares a web page from an ftree dataframe for a visualization of the data.
+\description{Prepares a multiple context web page from an ftree dataframe for a visualization of the data.
 }
 
 \usage{
-ftree2html(DF,dir="", write_file=FALSE)
+ftree2widget(DF, height = NULL, width = NULL)
 }
 
 \arguments{
 \item{DF}{ A fault tree dataframe object.}
-\item{dir}{A character string for an absolute directory in which R can read and write.}
-\item{write_file}{A logical controlling whether to perform the write operation.}
+\item{height}{Used to pass a fixed width to the html widget, optional}
+\item{width}{Used to pass a fixed height to the html widget, optional}
 }
 
 \value{
-Returns a character vector with escaped quote characters, suitable for writing to disk.
-Optionally, this vector will be written to a file taking the name of the object passed in as DF and appending '.html'.
+No specific value is returned; however a call to htmlwidgets::createWidget is made.
 }
 
 \references{
@@ -29,8 +28,7 @@ Optionally, this vector will be written to a file taking the name of the object 
 }
 
 \examples{
-mytree <- ftree.make(type="or", name="site power loss")
-ftree2html(mytree)
+
 }
 
 \keyword{ logic, risk, failure }
