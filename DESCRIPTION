@@ -6,7 +6,7 @@ Date: 2016-5-22
 Author: Jacob T. Ormerod
 Maintainer: Jacob T. Ormerod <jake@openreliability.org>
 Description: Code for presenting fault trees data as a widget.
-Depends: FaultFree, R (>= 3.0.0)
+Depends: FaultTree, R (>= 3.0.0)
 Imports: htmlwidgets (>= 0.3.2)
 License: GPL (>= 2)
 LazyLoad: yes
