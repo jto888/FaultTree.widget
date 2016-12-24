@@ -44,12 +44,10 @@ tree1<-addDemand(tree1, at=1, mttf=1.0, name="External power", name2="interrupti
 
 tree1<-ftree.calc(tree1)
 
-tree1[,1:7]
+## The tree can be displayed in the browser or RStudio vieweer using the following command:
 
-## The tree can be displayed in the browser using the following commands:
+ftree2widget(tree1)
 
-ftree2html(tree1, write_file=TRUE)
-browseURL('tree1.html')
 		
 ## example 2
 tree2<-ftree.make(type="or")

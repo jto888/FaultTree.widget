@@ -1,7 +1,7 @@
 ## ftree2widget.R
 ## handle data with optional SVG parameters and prepare as list for htmlwidgets::createWidget function call
 ftree2widget<-function(DF, height = NULL, width = NULL)  {
-	if(!ftree.test(DF)) stop("first argument must be a fault tree")	
+	if(!test.ftree(DF)) stop("first argument must be a fault tree")	
 
 ## Convert json formatted data to list format (so it can be converted back by htmlwidgets)
 root <- jsonlite::fromJSON(hierarchyDF2json(DF,data.col=c(1,5:16)), simplifyDataFrame = FALSE)
