@@ -26,7 +26,8 @@ var duration = 750,rectW = 124,rectH = 90,TrectH = 24;
 var tree = d3.layout.tree()
 .nodeSize([rectW*1.15, rectH*1.2])
 .separation(function(a, b) { return (a.parent == b.parent ? 1 : 1.2); });
-var svg = d3.select("#body").append("svg").attr("width", 1000).attr("height", 1000)
+// widget must select el, not '#body' as does html
+var svg = d3.select(el).append("svg").attr("width", 1000).attr("height", 1000)
 .call(zm = d3.behavior.zoom().scaleExtent([.5,3]).on("zoom", redraw)).append("g")
 .attr("transform", "translate(" + 350 + "," + 20 + ")");
 zm.translate([350, 20]);
