@@ -173,7 +173,7 @@ nodeEnter.append("text")
 .attr("y", TrectH  + 48)
 .attr("text-anchor", "left")
 .attr("fill", "black")
-.text(function (d) { return d.type==13 ? "Phf="+parseFloat(d.phf_pz.toFixed(2)) :"";});
+.text(function (d) { return d.type==13 ? "Phf="+parseFloat(d.p1.toFixed(2)) :"";});
 nodeEnter.append("text")
 //.attr("x", rectW/2)
 .attr("x", function(d) { return d.type==2 ? rectW/2 : rectW/2+10;})
@@ -181,8 +181,8 @@ nodeEnter.append("text")
 .attr("text-anchor", function(d) { return d.type==2 ? "middle" : "left";})
 .attr("fill", "maroon")
 .text(function (d) {
-	return d.type==2 ? "T="+parseFloat(d.interval.toFixed(4)) +" Po=" +parseFloat(d.phf_pz.toFixed(5))
-	: d.type==5 ? "T="+parseFloat(d.interval.toFixed(4))
+	return d.type==2 ? "T="+parseFloat(d.p2.toFixed(4)) +" Po=" +parseFloat(d.p1.toFixed(5))
+	: d.type==5 ? "T="+parseFloat(d.p2.toFixed(4))
 	:"";});
 var nodeUpdate = node.transition()
 .duration(duration)

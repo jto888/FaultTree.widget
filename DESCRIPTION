@@ -1,11 +1,11 @@
 Package: FaultTree.widget
 Type: Package
 Title: widget code for FaultTree
-Version: 0.0.14
-Date: 2017-1-28
+Version: 0.2.6
+Date: 2017-3-2
 Author: David J. Silkworth
 Maintainer: Jacob T. Ormerod <jake@openreliability.org>
-Description: Code for presenting fault trees data as a widget.
+Description: Code for presenting fault trees as a widget.
 Depends: FaultTree, R (>= 3.0.0)
 Imports: htmlwidgets (>= 0.3.2)
 License: GPL (>= 2)
