@@ -28,7 +28,7 @@ No specific value is returned; however a call to htmlwidgets::createWidget is ma
 }
 
 \examples{
-
+## Operation of the widget is system dependent.
 }
 
 \keyword{ logic, risk, failure }
