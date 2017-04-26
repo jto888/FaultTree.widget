@@ -2,4 +2,14 @@
 .node {cursor: pointer;}
 .node text {font: 10px sans-serif;font-weight: bold;}
 .link {fill: none;stroke: #ccc;stroke-width: 1.5px;}
-html, el {height: 100%;}
+html{
+  height: 100%;
+}
+el {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 5px;
+}

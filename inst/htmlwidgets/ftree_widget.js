@@ -22,15 +22,16 @@ width = 960,height = 800;
 var root =x.root;
 
 // Following is duplicated from FaultTree::HTMLd3script
-var duration = 750,rectW = 124,rectH = 90,TrectH = 24;
+var duration = 200,rectW = 124,rectH = 90,TrectH = 24;
+var width_initial = $(window).width()/2-60;
 var tree = d3.layout.tree()
 .nodeSize([rectW*1.15, rectH*1.2])
 .separation(function(a, b) { return (a.parent == b.parent ? 1 : 1.2); });
 // widget must select el, not '#body' as does html
 var svg = d3.select(el).append("svg").attr("width", "100%").attr("height", "100%")
-.call(zm = d3.behavior.zoom().scaleExtent([.5,3]).on("zoom", redraw)).append("g")
-.attr("transform", "translate(" + 350 + "," + 20 + ")");
-zm.translate([350, 20]);
+.call(zm = d3.behavior.zoom().scaleExtent([0.05,5]).on("zoom", redraw)).append("g")
+.attr("transform", "translate(" + width_initial + "," + 50 + ")");
+zm.translate([width_initial, 20]);
 root.x0 = 0;
 root.y0 = height / 2;
 function collapse(d) {
@@ -39,7 +40,7 @@ d._children = d.children;
 d._children.forEach(collapse);
 d.children = null;}}
 update(root);
-d3.select("#body").style("height", "800px");
+d3.select(el).style("height", "100%");
 function update(source) {
 var nodes = tree.nodes(root)
 links = tree.links(nodes);
