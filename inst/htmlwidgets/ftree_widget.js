@@ -22,15 +22,17 @@ width = 960,height = 800;
 var root =x.root;
 
 // Following is duplicated from FaultTree::HTMLd3script
-var duration = 750,rectW = 124,rectH = 90,TrectH = 24;
+var llim=1e-25;
+var duration = 200,rectW = 124,rectH = 90,TrectH = 24;
+var width_initial = $(window).width()/2-60;
 var tree = d3.layout.tree()
 .nodeSize([rectW*1.15, rectH*1.2])
 .separation(function(a, b) { return (a.parent == b.parent ? 1 : 1.2); });
-// widget must select el, not '#body' as does html
+// the widget must select el, not "#body" as in html
 var svg = d3.select(el).append("svg").attr("width", "100%").attr("height", "100%")
-.call(zm = d3.behavior.zoom().scaleExtent([.5,3]).on("zoom", redraw)).append("g")
-.attr("transform", "translate(" + 350 + "," + 20 + ")");
-zm.translate([350, 20]);
+.call(zm = d3.behavior.zoom().scaleExtent([0.05,5]).on("zoom", redraw)).append("g")
+.attr("transform", "translate(" + width_initial + "," + 50 + ")");
+zm.translate([width_initial, 20]);
 root.x0 = 0;
 root.y0 = height / 2;
 function collapse(d) {
@@ -39,7 +41,7 @@ d._children = d.children;
 d._children.forEach(collapse);
 d.children = null;}}
 update(root);
-d3.select("#body").style("height", "800px");
+d3.select("#body").style("height", "100%");
 function update(source) {
 var nodes = tree.nodes(root)
 links = tree.links(nodes);
@@ -72,6 +74,20 @@ nodeEnter.append("text")
 .attr("text-anchor", "middle")
 .text(function (d) {
 return d.name2;});
+nodeEnter.append("text")
+.attr("x", rectW / 2 -144)
+.attr("y", TrectH  +14)
+.attr("text-anchor", "middle")
+.attr("fill", "navy")
+.text(function (d) {
+return (d.tag_obj=="top" && d.p2>0) ? "Mission Time" : "" ;});
+nodeEnter.append("text")
+.attr("x", rectW / 2 -144)
+.attr("y", TrectH  +26)
+.attr("text-anchor", "middle")
+.attr("fill", "navy")
+.text(function (d) {
+return (d.tag_obj=="top" && d.p2>0) ? d.p2 : "" ;});
 var orGate="m 75,65 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z";
 var andGate="m 45,50 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15";
 var priorityGate="m 45,50 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 m 0,10 30,0";
@@ -79,6 +95,7 @@ var inhibitGate="m 60,35 -15,6.340 0,17.3205 15,6.340  15,-6.340 0,-17.3205 z";
 var alarmGate="m 75,65 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z m -30,0 v5 c0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 v-5";
 var voteGate="m 75,65 c  -1.4,-10,.6,-22-15,-30  -15.6,8,-13.4,20,-15,30 m 0,0 0,10 30,0 0,-10 m-28,-7.5 27,0"; 
 var house="m 45,50 0,15 30,0 0,-15 -15,-15  -15,15";
+var undeveloped="m 60,35 m 0,0 l 24,15 l -24,15 l -24,-15 z";
 var component="m 75, 50 a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 a15,15 .2 0,0 15,15 a15,15 .2 0,0 15,-15";
 nodeEnter.append("path")
 .attr("d",
@@ -97,7 +114,11 @@ case 15 : return(voteGate);
 break;
 case 16 : return(voteGate);
 break;
-case 6 : return(house);
+case 9 : return(house);
+break;
+case 6 : return(undeveloped);
+break;
+case 3 : return(undeveloped);
 break;
 default : return(component);
 }})
@@ -130,59 +151,64 @@ nodeEnter.append("text")
 .text(function (d) {
 return d.moe > 0 ? "R" : d.moe<0 ? "S" : "" ;});
 nodeEnter.append("text")
-.attr("x", rectW / 2 -28)
+.attr("x", rectW / 2 -31)
 .attr("y", TrectH  -26)
 .attr("text-anchor", "right")
 .attr("fill", "navy")
 .text(function (d) {
 return d.condition > 0 ? "Cond" : "" ;});
 nodeEnter.append("text")
-.attr("x", rectW / 2 +44)
+.attr("x", rectW / 2 +3)
 .attr("y", TrectH  -26)
-.attr("text-anchor", "right")
+.attr("text-anchor", "left")
 .attr("fill",  function(d){return d.moe==0 ? "red": "magenta";})
 .text(function (d) {
 return d.tag_obj;});
 nodeEnter.append("text")
-.attr("x", rectW/2+18)
+.attr("x", rectW/2+19)
 .attr("y", TrectH  + 12)
 .attr("text-anchor", "left")
 .attr("fill", "green")
 //.text(function (d) { return d.cfr>0&&d.condition==0 ? "Fail Rate":"";});
 .text(function (d) { return d.cfr>0 ? "Fail Rate":"";});
 nodeEnter.append("text")
-.attr("x", rectW/2+18)
+.attr("x", rectW/2+19)
 .attr("y", TrectH  + 24)
 .attr("text-anchor", "left")
 .attr("fill", "green")
 //.text(function (d) {return d.cfr>0&&d.condition==0 ? (d.cfr).toExponential(4):"";});
 .text(function (d) {return d.cfr>0 ? (d.cfr).toExponential(4):"";});
 nodeEnter.append("text")
-.attr("x", rectW/2+18)
+.attr("x", rectW/2+19)
 .attr("y", TrectH  + 36)
 .attr("text-anchor", "left")
 .attr("fill", "navy")
-.text(function (d) { return d.pbf>0 ? "Prob":"";});
+.text(function (d) { return d.pbf>llim ? "Prob":"";});
 nodeEnter.append("text")
-.attr("x", rectW/2+18)
+.attr("x", rectW/2+19)
 .attr("y", TrectH  + 48)
 .attr("text-anchor", "left")
 .attr("fill", "navy")
-.text(function (d) {return d.pbf>0 ? (d.pbf).toExponential(4):"" ;});
+.text(function (d) {return d.pbf>llim ? (d.pbf).toExponential(4):"" ;});
 nodeEnter.append("text")
 .attr("x", -4)
 .attr("y", TrectH  + 12)
 .attr("text-anchor", "left")
-//.attr("fill",  function(d){return d.condition==0 ? "lightgray": d.repairable==1 ? "dimgray": "white" ;})
-.attr("fill",  function(d){return d.condition==1 ? "dimgray":"lightgray" ;})
-.text(function (d) { return d.crt>0 ? "Repair Time":"";});
+.attr("fill",  function(d){return d.condition==1 ? "dimgray": d.etype>0 ? "dimgray" : "lightgray" ;})
+.text(function (d) { return d.crt>0 ? "Repair Time": d.etype==1 ? "Exponential": d.etype==2 ? "Weibull":"";});
 nodeEnter.append("text")
 .attr("x", -4)
 .attr("y", TrectH  + 24)
 .attr("text-anchor", "left")
-//.attr("fill",  function(d){return d.condition==0 ? "lightgray": d.repairable==1 ? "dimgray": "white" ;})
-.attr("fill",  function(d){return d.condition==1 ? "dimgray":"lightgray" ;})
-.text(function (d) {return d.crt>0 ? (d.crt).toExponential(4):"" ;});
+.attr("fill",  function(d){return d.condition==1 ? "dimgray": d.etype>0 ? "dimgray" : "lightgray" ;})
+.text(function (d) {return d.crt>0 ? (d.crt).toExponential(4):  d.etype==2 ? "B="+parseFloat(d.p1.toFixed(2)) : (d.etype==1 && d.p2>0) ? "exposure" :"" ;});
+nodeEnter.append("text")
+.attr("x", -4)
+.attr("y", TrectH  + 36)
+.attr("text-anchor", "left")
+// must have an else for fill condition
+.attr("fill",  function(d){return d.etype>0 ? "dimgray" : "white" ;})
+.text(function (d) {return d.etype==2 ? "TS="+d.p2 : (d.etype==1 && d.p2>0) ? d.p2 :"" ;});
 nodeEnter.append("text")
 .attr("x", -4)
 .attr("y", TrectH  + 48)
@@ -190,14 +216,12 @@ nodeEnter.append("text")
 .attr("fill", "black")
 .text(function (d) { return d.type==13 ? "Phf="+parseFloat(d.p1.toFixed(2)) :"";});
 nodeEnter.append("text")
-//.attr("x", rectW/2)
 .attr("x", function(d) { return d.type==2 ? rectW/2 : rectW/2+10;})
 .attr("y", TrectH  + 60)
 .attr("text-anchor", function(d) { return d.type==2 ? "middle" : "left";})
 .attr("fill", "maroon")
 .text(function (d) {
 	return d.type==2 ? "T="+parseFloat(d.p2.toFixed(4)) +" Po=" +parseFloat(d.p1.toFixed(5))
-	: d.type==5 ? "T="+parseFloat(d.p2.toFixed(4))
 	:"";});
 var nodeUpdate = node.transition()
 .duration(duration)
