@@ -28,7 +28,7 @@ var width_initial = $(window).width()/2-60;
 var tree = d3.layout.tree()
 .nodeSize([rectW*1.15, rectH*1.2])
 .separation(function(a, b) { return (a.parent == b.parent ? 1 : 1.2); });
-var svg = d3.select("#body").append("svg").attr("width", "100%").attr("height", "100%")
+var svg = d3.select(el).append("svg").attr("width", "100%").attr("height", "100%")
 .call(zm = d3.behavior.zoom().scaleExtent([0.05,5]).on("zoom", redraw)).append("g")
 .attr("transform", "translate(" + width_initial + "," + 50 + ")");
 zm.translate([width_initial, 20]);
