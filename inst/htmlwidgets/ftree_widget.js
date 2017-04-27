@@ -298,4 +298,3 @@ return "M" + sourceX + "," + sourceY
 + "V" + (sourceY+targetY)/2
 + "H" + targetX
 + "V" + targetY;}
-'
