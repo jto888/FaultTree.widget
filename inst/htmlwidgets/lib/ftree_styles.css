@@ -1,11 +1,8 @@
 <!--ftree_styles.css-->
-.node {cursor: pointer;}
-.node text {font: 10px sans-serif;font-weight: bold;}
-.link {fill: none;stroke: #ccc;stroke-width: 1.5px;}
 html{
   height: 100%;
 }
-el {
+body {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -13,3 +10,6 @@ el {
   left: 0;
   margin: 5px;
 }
+.node {cursor: pointer;}
+.node text {font: 10px sans-serif;font-weight: bold;}
+.link {fill: none;stroke: #ccc;stroke-width: 1.5px;}
