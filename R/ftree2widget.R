@@ -4,7 +4,7 @@ ftree2widget<-function(DF, height = NULL, width = NULL)  {
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")	
 
 ## Convert json formatted data to list format (so it can be converted back by htmlwidgets)
- root1 <- jsonlite::fromJSON(hierarchyDF2json(DF,data.col=c(1:14,16:17)), simplifyDataFrame = FALSE)
+ root <- jsonlite::fromJSON(hierarchyDF2json(DF,data.col=c(1,5:10,13:17)), simplifyDataFrame = FALSE)
 # * checking dependencies in R code ... WARNING
 # '::' or ':::' import not declared from: 'jsonlite'
 ## root <- fromJSON(hierarchyDF2json(DF,data.col=c(1,5:10,13:17)), simplifyDataFrame = FALSE)
@@ -16,8 +16,8 @@ ftree2widget<-function(DF, height = NULL, width = NULL)  {
 
     # create widget
     htmlwidgets::createWidget(
-        name = "ftree_widget1",
-        x = list(root=root1),
+        name = "ftree_widget",
+        x = list(root=root),
         width = width,
         height = height,
         htmlwidgets::sizingPolicy(padding = 10, browser.fill = TRUE),
