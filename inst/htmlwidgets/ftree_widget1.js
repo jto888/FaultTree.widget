@@ -10,7 +10,7 @@
   //   called with data. Static contexts will cause this to be called once per
   //   element; Shiny apps will cause this to be called multiple times per
   //   element, as the data changes.
-  name: 'ftree_widget',
+  name: 'ftree_widget1',
 
   type: 'output',
 
