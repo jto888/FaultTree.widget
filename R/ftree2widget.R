@@ -16,7 +16,7 @@ ftree2widget<-function(DF, height = NULL, width = NULL)  {
 
     # create widget
     htmlwidgets::createWidget(
-        name = "ftree_widget",
+        name = "ftree_widget1",
         x = list(root=root1),
         width = width,
         height = height,
