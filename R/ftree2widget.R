@@ -14,7 +14,9 @@ ftree2widget<-function(DF, height = NULL, width = NULL)  {
 ## removed NOTE and WARNING from check --as-cran by importing jsonlite in DESCRIPTION (although it is 
 ## imported by htmlwidgets) and adding import(jsonlite,fromJSON) to NAMESPACE
 ## without re-importing jsonlite in DESCRIPTION the import in NAMESPACE  creates an ERROR
-	if(any(DF$Name!="" || DF$Name2!="")) {
+
+# ftree.make will force the name convention as "top of tree" if none provided
+if(DF$Name[1]!="") {
 		# create widget1
 		htmlwidgets::createWidget(
 			name = "ftree_widget1",
