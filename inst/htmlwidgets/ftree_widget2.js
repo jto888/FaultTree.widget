@@ -24,7 +24,8 @@ var root =x.root;
 // Following is duplicated from FaultTree::HTMLd3script
 var llim=1e-25;
 var duration = 200,rectW = 124,rectH = 120,TrectH = 40;
-var width_initial = $(window).width()/2-60;
+//var width_initial = $(window).width()/2-60;
+var width_initial = $("dev").width()/2-60;
 var tree = d3.layout.tree()
 .nodeSize([rectW*1.15, rectH*1.2])
 .separation(function(a, b) { return (a.parent == b.parent ? 1 : 1.2); });
